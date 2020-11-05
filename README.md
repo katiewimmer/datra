@@ -14,4 +14,4 @@ Coming soon!
 
 Please check out Tasks.md in scikitlearn_calc_bias for stuff I haven't done! I'd love if someone could add more code for a potential feature relating to demographic, like gender etc. in the classification_bias file. 
 
-I also need to generalize my code to user input, so that would be a super welcome addition! 
+I also need to add code to make the user input the dataset I'm going to analyze (rather than just making a test one myself), so that would be a super welcome addition! 
