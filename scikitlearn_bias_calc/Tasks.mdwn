@@ -1,0 +1,4 @@
+# Tasks That Still Need To Be Done
+
+1. Make my code work for more features (e.g. whether statistically representative of "gender" in the U.S., etc. etc.)
+2. Check whether the code is performing worse/has an average of more false positives for a particular group/feature
