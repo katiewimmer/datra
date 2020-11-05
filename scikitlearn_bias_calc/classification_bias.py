@@ -36,7 +36,19 @@ class classification_bias:
                         if percentR < 5 or percentR > 10:
                             return False
         #flesh this out w other features
+        elif feature == "sex":
+            sex = ["male, female"] # Census currently only does male and female
+            for i in range (0, len(sex)):
+                if sex[i] in countS:
+                    percentR = countS[sex[i]]*1.0/numSamples * 100.0
+                    if (sex[i] == "female"):
+                        if percentR < 55 or percentR > 45:
+                            return False
+                    if sex[i] == "male":
+                        if percentR < 55 or percentR > 45:
+                            return False
         return True
+
     def training_bias(self): #step one (refer to top)
         s = [len(self.class_data), len(self.class_data[0])]
         for j in range (0, s[1]):
