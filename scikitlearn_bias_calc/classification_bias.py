@@ -37,7 +37,7 @@ class classification_bias:
                             return False
         #flesh this out w other features
         elif feature == "sex":
-            sex = ["male, female"] # Census currently only does male and female
+            sex = ["male", "female"] # Census currently only does male and female
             for i in range (0, len(sex)):
                 if sex[i] in countS:
                     percentR = countS[sex[i]]*1.0/numSamples * 100.0
@@ -46,6 +46,36 @@ class classification_bias:
                             return False
                     if sex[i] == "male":
                         if percentR < 55 or percentR > 45:
+                            return False
+        elif feature == "gender":
+            gender = ["cis-male", "cis-female", "transgender"] 
+            #Stats said 51.1% female, 48.9% male. Other sources said 0.6% transgender
+            #Use what you want, sorry if this isn't what you wanted
+            for i in range (0, len(gender)):
+                if gender[i] in countS:
+                    percentR = countS[sex[i]]*1.0/numSamples * 100.0
+                    if (gender[i] == "cis-male"):
+                        if percentR < 45 or percentR > 55:
+                            return False
+                    if gender[i] == "cis-female":
+                        if percentR < 47 or percentR > 57:
+                            return False
+                    if gender[i] == "transgender":
+                        if percentR < 0.3 or percentR > 0.9:
+                            return False
+        elif feature == "age":
+            age = ["0-14", "15-64", "65+"] 
+            for i in range (0, len(age)):
+                if age[i] in countS:
+                    percentR = countS[sex[i]]*1.0/numSamples * 100.0
+                    if (age[i] == "0-14"):
+                        if percentR < 13.5 or percentR > 23.5 :
+                            return False
+                    if age[i] == "15-64":
+                        if percentR < 60 or percentR > 70:
+                            return False
+                    if age[i] == "65+":
+                        if percentR < 11 or percentR > 21:
                             return False
         return True
 
