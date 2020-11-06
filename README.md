@@ -8,7 +8,14 @@ Coming soon!
 
 # Installation
 
-Coming soon! 
+Install Datra's dependencies with  either
+```python
+pip install -U scikit-learn
+```
+or 
+```python
+conda install scikit-learn
+```
 
 # Contributions
 
