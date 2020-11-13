@@ -16,7 +16,8 @@ class classification_bias:
         self.features = features #names of the features for each column (think 'race', 'gender', etc. etc.)
     def isStatRep(self, feature, countS, numSamples): #if it's statistically representative (with respect to america)
         if feature == "race":
-            race = ["white", "hispanic/latino", "black/african american", "native american", "asian/pacific islander", "other"] #took this off commonly surveyed races, wondering whether categories like hispanic/latino conflate race w ethnicity, e.g. white latinx people
+            race = ["white", "hispanic/latino", "black/african american", "native american", "asian/pacific islander", "other"] 
+            #took this off commonly surveyed races, wondering whether categories like hispanic/latino conflate race w ethnicity, e.g. white latinx people
             for i in range (0, len(race)):
                 if race[i] in countS: #how to do this for people who identify w more than one race?
                     percentR = countS[race[i]]*1.0/numSamples * 100.0
@@ -77,6 +78,44 @@ class classification_bias:
                     if age[i] == "65+":
                         if percentR < 11 or percentR > 21:
                             return False
+        elif feature == "distribution of net wealth in the US":
+        #Stats used from statista.com
+        #Stats said that 30.5% of the net wealth in the US is from the Top 1%, 38.5% is from the 90th to 99th Percentile, 28.7% is from the 50th to 90th Percentile, and 1.8% is from the Bottom 50 Percent
+            wealth = ["Top 1%", "90th to 99th Percentile", "50th to 90th Percentile", "Bottom 50% Percentile"] 
+            for i in range (0, len(wealth)):
+                if wealth[i] in countS:
+                    percentR = countS[sex[i]]*1.0/numSamples * 100.0     
+                    if (wealth[i] == "Top 1%"):
+                        if percentR < 28.5 or percentR > 32.5:
+                            return False 
+                    if (wealth[i] == "90th to 99th Percentile"):
+                        if percentR < 35 or percentR > 43:
+                            return False 
+                    if (wealth[i] == "50th to 90th Percentile"):
+                        if percentR < 25.5 or percentR > 33:
+                            return False 
+                    if (wealth[i] == "Bottom 50% Percentile"):
+                        if percentR < 1 or percentR > 4:
+                            return False
+        elif feature == "disability and functioning":
+        #Stats used from cdc.gov 
+        #Stats said that for adults aged 18 and over- 16.5% face Hearing Trouble, 12.9% face Vision Trouble, 7.8% are unable to/find it difficult to walk a quarter mile, 16.3% face any physical functioning difficulty 
+        #"Level of reported difficulty in 6 domains of functioning" is NOT INCLUDED BELOW
+            difficulty = ["Hearing trouble", "Vision Trouble", "Unable/Difficult to walk quarter mile", "Any physical functioning difficulty"]
+            for i in range (0, len(difficulty)):
+                percentR = countS[sex[i]]*1.0/numSamples * 100.0
+                if (difficulty[i] == "Hearing Trouble"):
+                    if percentR < 12.5 or percentR > 19.5:
+                        return False 
+                if (difiiculty[i] == "Vision Trouble"):
+                    if percentR < 10.5 or percentR > 14:
+                        return False 
+                if (difficulty[i] == "Unable/Difficult to walk quarter mile"):
+                    if percentR < 5.5 or percentR > 9.5:
+                        return False 
+                if (difficulty[i] == "Any physical functioning difficulty"):
+                     if percentR < 13.5 or percentR > 19:
+                         return False 
         return True
 
     def training_bias(self): #step one (refer to top)
