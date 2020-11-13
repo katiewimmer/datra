@@ -16,23 +16,26 @@ class classification_bias:
         self.features = features #names of the features for each column (think 'race', 'gender', etc. etc.)
     def isStatRep(self, feature, countS, numSamples): #if it's statistically representative (with respect to america)
         if feature == "race":
-            race = ["white", "hispanic/latino", "black/african american", "native american", "asian/pacific islander", "other"] #took this off commonly surveyed races, wondering whether categories like hispanic/latino conflate race w ethnicity, e.g. white latinx people
-            for i in range (0, len(race)):
-                if race[i] in countS: #how to do this for people who identify w more than one race?
-                    percentR = countS[race[i]]*1.0/numSamples * 100.0
-                    if (race[i] == "white"):
+            race1 = ["white", "hispanic/latino", "black/african american", "native american", "asian/pacific islander", "other"] #took this off commonly surveyed races, wondering whether categories like hispanic/latino conflate race w ethnicity, e.g. white latinx people
+            race2 = ["white", "hispanic/latino", "black/african american", "native american", "asian/pacific islander", "other"]
+            for i in range (0, len(race1)):
+                for k in range (0, len(race2)
+                if race1[i] in countS and race2[i] in countS: #how to do this for people who identify w more than one race?
+                    # take the average percentage between both race statistics for precentR
+                    percentR = countS[(race[i] + race2[i])/2]*1.0/numSamples * 100.0
+                    if (race1[i] == "white" or race2[i] == "white"):
                         if percentR < 65 or percentR > 75:
                             return False
-                    if (race[i] == "hispanic/latino"):
+                    if (race1[i] == "hispanic/latino" or race2[i] == "hispanic/latino"):
                         if percentR < 14 or percentR > 20:
                             return False
-                    if race[i] == "black/african american":
+                    if (race1[i] == "black/african american" or race2[i] == "black/african american"):
                         if percentR < 11 or percentR > 18:
                             return False
-                    if race[i] == "native american":
+                    if (race1[i] == "native american" or race2[i] == "native american"):
                         if percentR < 1 or percentR > 4:
                             return False
-                    if race[i] == "asian/pacific islander": #check these numbers again
+                    if (race1[i] == "asian/pacific islander" or race2[i] == "asian/pacific islander"): #check these numbers again
                         if percentR < 5 or percentR > 10:
                             return False
         #flesh this out w other features
@@ -44,7 +47,7 @@ class classification_bias:
                     if (sex[i] == "female"):
                         if percentR < 55 or percentR > 45:
                             return False
-                    if sex[i] == "male":
+                    if (sex[i] == "male"):
                         if percentR < 55 or percentR > 45:
                             return False
         elif feature == "gender":
@@ -64,18 +67,29 @@ class classification_bias:
                         if percentR < 0.3 or percentR > 0.9:
                             return False
         elif feature == "age":
-            age = ["0-14", "15-64", "65+"] 
+            # Age ranges derived from the 2010 Census
+            # Under 5 years: 6.8% Ages 5-17: 18.9% Ages 18-24: 9.6% Ages 25-44: 30.2% Ages 45-64: 22.1% Over 65: 12.4
+            age = ["0-5", "5-17", "18-24", "25-44", "45-64", "65+"] 
             for i in range (0, len(age)):
                 if age[i] in countS:
                     percentR = countS[sex[i]]*1.0/numSamples * 100.0
-                    if (age[i] == "0-14"):
-                        if percentR < 13.5 or percentR > 23.5 :
+                    if (age[i] == "0-5"):
+                        if percentR < 5 or percentR > 8 :
                             return False
-                    if age[i] == "15-64":
-                        if percentR < 60 or percentR > 70:
+                    if age[i] == "5-17":
+                        if percentR < 14 or percentR > 24:
+                            return False
+                    if age[i] == "18-24":
+                        if percentR < 6 or percentR > 13:
+                            return False
+                    if (age[i] == "25-44"):
+                        if percentR < 25 or percentR > 35 :
+                            return False
+                    if age[i] == "45-64":
+                        if percentR < 18 or percentR > 26:
                             return False
                     if age[i] == "65+":
-                        if percentR < 11 or percentR > 21:
+                        if percentR < 8 or percentR > 16:
                             return False
         return True
 
