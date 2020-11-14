@@ -107,7 +107,7 @@ class classification_bias:
                 if (difficulty[i] == "Hearing Trouble"):
                     if percentR < 12.5 or percentR > 19.5:
                         return False 
-                if (difiiculty[i] == "Vision Trouble"):
+                if (difficulty[i] == "Vision Trouble"):
                     if percentR < 10.5 or percentR > 14:
                         return False 
                 if (difficulty[i] == "Unable/Difficult to walk quarter mile"):
@@ -116,6 +116,25 @@ class classification_bias:
                 if (difficulty[i] == "Any physical functioning difficulty"):
                      if percentR < 13.5 or percentR > 19:
                          return False 
+        elif feature == "education attainment":
+            education = ["High School or equivalent degree", "Some college, no degree", "Associates degree", "Bachelors degree", "Graduate or professional degree"]
+            for i in range(0, len(education)):
+                percentR = countS[sex[i]]*1.0/numSamples * 100.0
+                if (education[i] == "High School or equivalent degree"):
+                    if percentR < 15.5 or percentR > 30.0:
+                        return False
+                if (education[i] == "Some college, no degree"):
+                    if percentR < 15.0 or percentR > 20.0:
+                        return False
+                if (education[i] == "Associates degree"):
+                    if percentR < 3.0 or percentR > 12.0:
+                        return False
+                if (education[i] == "Bachelors degree"):
+                    if percentR < 15.0 or percentR > 25.0:
+                        return False
+                if (education[i] == "Graduate or professional degree"):
+                    if percentR < 8.0 or percentR > 15.5:
+                        return False
         return True
 
     def training_bias(self): #step one (refer to top)
