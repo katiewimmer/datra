@@ -51,3 +51,7 @@ Currently, DATRA supports checking training sets against census data to determin
 Please check out Tasks.md in scikitlearn_calc_bias for stuff I haven't done! I'd love if someone could add more code for a potential feature relating to demographic, like gender etc. in the classification_bias file. 
 
 I also need to add code to make the user input the dataset I'm going to analyze (rather than just making a test one myself), so that would be a super welcome addition! 
+
+# Philosophy
+
+DATRA believes in fostering a welcoming, safe, and meaningfully inclusive environment for those underrepresented in the open-source community. As such, we've made a commitment to moving away from the open-source nomenclature considered offensive or flippant by many marginalized communities. Namely, we refer to our primary branch as "main" rather than "master", and are committed to making any other changes to our nomenclature that would make DATRA feel more welcoming to any of our contributors.
